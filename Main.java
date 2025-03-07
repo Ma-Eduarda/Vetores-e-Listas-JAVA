@@ -31,3 +31,38 @@ public class Main {
         }
     }
 }
+
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        String[] arr = { "1001,D,300", "1002,C,200", "1001,D,300" };
+        balance(arr);
+    }
+
+    public static void balance(String[] balances) {
+        int total = 0;
+        Map<String, Boolean> transacoesProcessadas = new HashMap<>();
+
+        for (String transacao : balances) {
+            if (transacoesProcessadas.containsKey(transacao)) {
+                continue; // Ignora transação duplicada
+            }
+
+            transacoesProcessadas.put(transacao, true); // Registra a transação
+
+            String[] parts = transacao.split(",");
+            String type = parts[1];
+            int value = Integer.parseInt(parts[2]);
+
+            if (type.equals("D")) {
+                total -= value;
+            } else {
+                total += value;
+            }
+
+            System.out.println("Balance -> " + total);
+        }
+    }
+}
